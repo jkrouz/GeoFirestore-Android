@@ -192,7 +192,7 @@ public class GeoQuery {
     }
 
     private void addValueToReadyListener(final Query firestore, final GeoHashQuery query) {
-        firestore.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firestore.get(Source.SERVER).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull final Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
@@ -324,7 +324,7 @@ public class GeoQuery {
         final String documentID = documentSnapshot.getId();
         final LocationInfo info = this.locationInfos.get(documentID);
         if (info != null) {
-            this.geoFirestore.getRefForDocumentID(documentID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            this.geoFirestore.getRefForDocumentID(documentID).get(Source.SERVER).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()){
